@@ -1,25 +1,67 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import "../../styles/index.css"
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
-
-//create your first component
 const Home = () => {
+	const [color, setColor] = useState("red");
+	const colorsList = ["red", "orange", "green"];
+	let intervalId;
+	
+	const automatic = () => {
+			if (intervalId) {
+				clearInterval(intervalId);
+				}
+		
+			let currentIndex = colorsList.indexOf(color);
+			if (currentIndex === -1) { // -1 = not found in array
+			currentIndex = 0;
+			}
+
+			intervalId = setInterval(() => {
+			const nextIndex = (currentIndex + 1) % colorsList.length //(3);
+			setColor(colorsList[nextIndex]); // use Index number of array to insert color into useState hook
+			currentIndex = nextIndex;
+			}, 1000);
+		};		
+			
+	useEffect(() => {
+		// Clear the interval when the component unmounts
+		return () => {
+		if (intervalId) {
+			clearInterval(intervalId);
+		}
+		};
+	}, []);
+	
 	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<>
+		<div className="page">
+			<div className="page__content">
+				<div className="tl__background">
+					<div 
+					onClick={() => setColor("red")}
+					className={color === "red"
+						? "tl__circle tl__circle--red display"
+						: "tl__circle tl__circle--red"}
+					>
+					</div>
+					<div 
+					onClick={() => setColor("orange")}
+					className={color === "orange"
+						? "tl__circle tl__circle--orange display"
+						: "tl__circle tl__circle--orange"}
+					></div>
+					<div 
+					onClick={() => setColor("green")}
+					className={color === "green"
+						? "tl__circle tl__circle--green display"
+						: "tl__circle tl__circle--green"}
+					>
+					</div>
+				</div>
+			</div>
+			<button onClick={() => automatic()}>Automatic Traffic Lights</button>
 		</div>
+		</>
 	);
 };
 

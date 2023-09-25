@@ -1,12 +1,154 @@
+/* CSS NORMALISATION */
+*,
+body,
+*::before,
+*::after {
+padding: 0;
+margin: 0;
+border: 0;
+/*Remove the margin, padding and border of all elements (all browsers)*/
+font-size: 10px;
+/*10px = 1em -> pixel size/10 = #em (16px=1.6em)*/
+box-sizing: border-box;
+/*The full area/size of an element`s box is measured by its total height and width, not just the content section. 
+The different box sections adjust to the defined box size */
+}
 
-/* 
+button {
+font-family: inherit;
+font-size: 100%;
+line-height: 1.15;
+/* Change the font styles (all browsers)*/
+margin: 0;
+/* Remove the margin (Firefox, Safari) */
+text-transform: none;
+/*Remove the inheritance of text transform (Edge, Firefox, IE)*/
+-webkit-appearance: button;
+appearance: button;
+/*Correct the inability to style clickable types (IOS, Safari)*/
+}
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
 
-*/
+button:hover,
+input[type="submit"] {
+cursor: pointer;
+transform: translateY(-0.15rem);
+/*Buttons on hover use the pointer cursor and have a small animation*/
+}
+
+
+[type="button"],
+[type="reset"],
+[type="submit"] {
+-webkit-appearance: button;
+appearance: button;
+/*Correct the inability to style clickable types (IOS, Safari)*/
+}
+/* CUSTOM STYLES  */
+
+.page {
+    height: 100vh; 
+    width: 100vw;
+    display: grid;
+    place-items: center;
+    position: relative;
+    background-image: url(https://img.freepik.com/premium-vector/modern-city-skyline-background_77417-791.jpg?w=996);
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* z-index: -5 */
+}
+
+.page__content {
+    border: 6px solid black;
+    border-radius: 10px;
+    position: absolute;
+    top: 1vh;
+}
+
+.tl__background {
+    height: 300px;
+    width: 100px;
+    background-color: rgb(26, 26, 26);
+    border-radius: 5px;
+    outline: 4px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.tl__background::after {
+    content: "";
+    height: 142px;
+    width: 25px;
+    background-color: black;
+    position: absolute;
+    left: 37%;
+    top: -146px;
+    z-index: 0;
+}
+
+.tl__circle {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.tl__circle::before {
+    content: "";
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    filter: blur(7px);
+    position: absolute;
+    left: -7%;
+    top: -10%;
+    display: none;
+}
+
+.display.tl__circle::before{
+    display: block;
+}
+
+.tl__circle--red, .tl__circle--red::before {
+    background-color: red;
+}
+
+.tl__circle--orange, .tl__circle--orange::before {
+    background-color: orange;
+}
+
+.tl__circle--green, .tl__circle--green::before {
+    background-color: green;
+}
+
+.page::before, .page::after {
+    content: "";
+    height: 2vh;
+    width: max(100px, 26%);
+    background-image: linear-gradient(to right, grey 45%, white 46%, white 56%, grey 57%);
+    border: 1px solid black;
+    position: absolute;
+}
+
+.page::before {
+    left: 10px;
+}
+
+.page::after {
+    right: 10px;
+}
+
+button {
+    padding: 5px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-top: 100px;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+}
